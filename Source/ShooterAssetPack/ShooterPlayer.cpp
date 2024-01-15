@@ -2,6 +2,7 @@
 
 
 #include "ShooterPlayer.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AShooterPlayer::AShooterPlayer()
@@ -34,6 +35,9 @@ void AShooterPlayer::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &APawn::AddControllerYawInput);
 
+	PlayerInputComponent->BindAxis(TEXT("LookUpRate"), this, &AShooterPlayer::LookUpRate);
+	PlayerInputComponent->BindAxis(TEXT("LookRightRate"), this, &AShooterPlayer::LookRightRate);
+
 	PlayerInputComponent->BindAction(TEXT("Jump"), EInputEvent::IE_Pressed ,this, &ACharacter::Jump);
 
 }
@@ -47,6 +51,17 @@ void AShooterPlayer::MoveRight(float AxisValue)
 {
 	AddMovementInput(GetActorRightVector() * AxisValue);
 }
+
+void AShooterPlayer::LookUpRate(float AxisValue)
+{
+	AddControllerPitchInput(AxisValue * RotationRate * GetWorld()->GetDeltaSeconds());
+}
+
+void AShooterPlayer::LookRightRate(float AxisValue)
+{
+	AddControllerYawInput(AxisValue * RotationRate * GetWorld()->GetDeltaSeconds());
+}
+
 
 
 
