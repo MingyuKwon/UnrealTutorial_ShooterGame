@@ -34,4 +34,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	UParticleSystem* MuzzleFlash;
+
+	UPROPERTY(EditDefaultsOnly)
+	float MaxRange = 1000;
 };
