@@ -77,13 +77,18 @@ void AShooterPlayer::PullTrigger()
 float AShooterPlayer::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
 {
 	float DamageApplied = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+	DamageApplied = FMath::Min(Health, DamageApplied);
 	Health -= DamageApplied;
 
-	UE_LOG(LogTemp, Display, TEXT("%f"), Health);
+	UE_LOG(LogTemp, Warning, TEXT("%f"), Health);
+
 	return DamageApplied;
 }
 
-
+bool AShooterPlayer::isDead() const
+{
+	return Health <= 0;
+}
 
 
 
