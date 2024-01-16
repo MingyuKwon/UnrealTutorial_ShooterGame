@@ -18,6 +18,7 @@ void AShooterPlayer::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	Health = MaxHealth;
 	Gun = GetWorld()->SpawnActor<AGun>(GunClass);
 	GetMesh()->HideBoneByName(TEXT("weapon_r"), EPhysBodyOp::PBO_None);
 	Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("weaponSocket"));
@@ -72,6 +73,16 @@ void AShooterPlayer::PullTrigger()
 {
 	Gun->PullTrigger();
 }
+
+float AShooterPlayer::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
+{
+	float DamageApplied = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+	Health -= DamageApplied;
+
+	UE_LOG(LogTemp, Display, TEXT("%f"), Health);
+	return DamageApplied;
+}
+
 
 
 

@@ -53,7 +53,15 @@ void AGun::PullTrigger()
 	
 	if (GetWorld()->LineTraceSingleByChannel(hit, out_Location, End, ECollisionChannel::ECC_GameTraceChannel1))
 	{
-		DrawDebugPoint(GetWorld(), hit.ImpactPoint, 20, FColor::Red, true);
+		FVector ShotDirection = -out_Rotation.Vector();
+		UGameplayStatics::SpawnEmitterAtLocation(this, HitFlash, hit.ImpactPoint);
+
+		AActor* hittedActor = hit.GetActor();
+		if (hittedActor)
+		{
+			FPointDamageEvent DamageEvent(Damage, hit, ShotDirection, nullptr);
+			hittedActor->TakeDamage(Damage, DamageEvent, OwnerController, this);
+		}
 	}
 
 
