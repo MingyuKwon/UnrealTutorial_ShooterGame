@@ -7,15 +7,23 @@
 void AShooterAI::BeginPlay()
 {
 	Super::BeginPlay();
-	APawn* playerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-
-	SetFocus(playerPawn);
+	
 }
 
 void AShooterAI::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	APawn* playerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-	MoveToActor(playerPawn, 50);
+
+	if(LineOfSightTo(playerPawn))
+	{
+		SetFocus(playerPawn);
+		MoveToActor(playerPawn, AcceptanceRadius);
+	}
+	else
+	{
+		ClearFocus(EAIFocusPriority::Gameplay);
+		StopMovement();
+	}
 
 }
