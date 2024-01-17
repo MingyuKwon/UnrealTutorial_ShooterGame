@@ -5,6 +5,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Gun.h"
 #include "Components/CapsuleComponent.h"
+#include "ShooterGameMode.h"
 
 // Sets default values
 AShooterPlayer::AShooterPlayer()
@@ -87,6 +88,12 @@ float AShooterPlayer::TakeDamage(float DamageAmount, struct FDamageEvent const& 
 	{
 		DetachFromControllerPendingDestroy();
 		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		AShooterGameMode* GameMode = GetWorld()->GetAuthGameMode<AShooterGameMode>();
+
+		if (GameMode)
+		{
+			GameMode->PawnKilled(this);
+		}
 	}
 
 	return DamageApplied;

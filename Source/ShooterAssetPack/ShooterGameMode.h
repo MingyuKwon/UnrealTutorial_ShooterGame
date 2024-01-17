@@ -14,4 +14,6 @@ class SHOOTERASSETPACK_API AShooterGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+public:
+	virtual void PawnKilled(APawn* pawnKilled);
 };
