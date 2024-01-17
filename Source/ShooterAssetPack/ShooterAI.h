@@ -16,6 +16,7 @@ class SHOOTERASSETPACK_API AShooterAI : public AAIController
 
 public:
 	virtual void Tick(float DeltaTime) override;
+	bool isDead() const;
 
 protected:
 	virtual void BeginPlay() override;
