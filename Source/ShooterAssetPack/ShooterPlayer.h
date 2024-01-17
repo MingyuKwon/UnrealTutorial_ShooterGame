@@ -23,6 +23,8 @@ public:
 	UFUNCTION(BlueprintPure)
 	bool isDead() const;
 
+	void PullTrigger();
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -37,7 +39,7 @@ private:
 
 	void LookUpRate(float AxisValue);
 	void LookRightRate(float AxisValue);
-	void PullTrigger();
+	
 	UPROPERTY(EditAnywhere)
 	float RotationRate = 10;
 

@@ -22,18 +22,4 @@ void AShooterAI::BeginPlay()
 void AShooterAI::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	APawn* playerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
-
-
-	if (LineOfSightTo(playerPawn))
-	{
-		GetBlackboardComponent()->SetValueAsVector(TEXT("PlayerLocation"), playerPawn->GetActorLocation());
-		GetBlackboardComponent()->SetValueAsVector(TEXT("LastKnownPlayerLocation"), playerPawn->GetActorLocation());
-	}
-	else
-	{
-		GetBlackboardComponent()->ClearValue(TEXT("PlayerLocation"));
-		
-	}
-
 }
