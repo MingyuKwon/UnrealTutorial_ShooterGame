@@ -106,5 +106,10 @@ bool AShooterPlayer::isDead() const
 	return Health <= 0;
 }
 
+float AShooterPlayer::GetHealthPercent() const
+{
+	return Health / MaxHealth;
+}
+
 
 

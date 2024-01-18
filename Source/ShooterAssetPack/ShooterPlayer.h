@@ -23,6 +23,9 @@ public:
 	UFUNCTION(BlueprintPure)
 	bool isDead() const;
 
+	UFUNCTION(BlueprintPure)
+	float GetHealthPercent() const;
+
 	void PullTrigger();
 
 	// Called every frame
