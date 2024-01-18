@@ -17,6 +17,8 @@ class SHOOTERASSETPACK_API AShooterPlayerController : public APlayerController
 public:
 	virtual void GameHasEnded(class AActor* EndGameFocus = nullptr, bool bIsWinner = false) override;
 
+	virtual void BeginPlay() override;
+
 private:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<class UUserWidget> LoseScreenClass;
@@ -25,7 +27,13 @@ private:
 	TSubclassOf<class UUserWidget> WinScreenClass;
 
 	UPROPERTY(EditAnywhere)
+	TSubclassOf<class UUserWidget> HUDScreenClass;
+
+	UPROPERTY(EditAnywhere)
 	float restartDelay = 3.f;
 
 	FTimerHandle restartTimer;
+
+	UPROPERTY();
+	UUserWidget* HUDScreen;
 };

@@ -25,6 +25,17 @@ void AShooterPlayerController::GameHasEnded(class AActor* EndGameFocus, bool bIs
 			LoseScreen->AddToViewport();
 		}
 	}
+	HUDScreen->RemoveFromViewport();
 
 	GetWorldTimerManager().SetTimer(restartTimer,this, &APlayerController::RestartLevel, restartDelay);
+}
+
+void AShooterPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+	HUDScreen = CreateWidget(this, HUDScreenClass);
+	if (HUDScreen)
+	{
+		HUDScreen->AddToViewport();
+	}
 }
