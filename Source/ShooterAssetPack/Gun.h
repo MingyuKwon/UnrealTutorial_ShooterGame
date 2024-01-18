@@ -43,4 +43,10 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 	float Damage = 10;
+
+	UPROPERTY(EditDefaultsOnly)
+	USoundBase* MuzzleSound;
+
+	UPROPERTY(EditDefaultsOnly)
+	USoundBase* HitSound;
 };
